@@ -1,3 +1,4 @@
+/*
 import { Navigate } from "react-router-dom";
 
 const ProtectedRoute = ({ children }) => {
@@ -7,3 +8,5 @@ const ProtectedRoute = ({ children }) => {
 };
 
 export default ProtectedRoute;
+
+*/

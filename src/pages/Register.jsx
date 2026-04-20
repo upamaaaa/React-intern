@@ -25,13 +25,16 @@ function Register() {
         data,
       );
       localStorage.setItem("isAuthenticated", "true");
+      localStorage.setItem("user", JSON.stringify(response.data));
       navigate("/dashboard");
+
     } catch (error) {
       console.error("Login failed:", error);
       alert("Login failed. Please check your credentials and try again.");
+      clearErrors();
       return;
     }
-
+    
     reset();
   };
   return (
@@ -39,7 +42,7 @@ function Register() {
       <div className="card shadow" style={{ width: "350px" }}>
         <div className="card-body">
           <h3 className="text-center mb-3">Login</h3>
-          <img src={cat} alt="Cat" style={{ width: "320px" }} />;
+          <img src={cat} alt="Cat" style={{ width: "320px" }} /> 
           <form onSubmit={handleSubmit(onSubmit)}>
             <Controller
               name="username"
@@ -84,7 +87,7 @@ function Register() {
                       position: "absolute",
                       right: "10px",
                       top: "50%",
-                      transform: "translateY(-50%)",
+                      
                     }}
                   >
                     {showPassword ? "Hide" : "Show"}
