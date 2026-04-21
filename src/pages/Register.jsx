@@ -27,7 +27,7 @@ function Register() {
 
       console.log("Login successful:", response.data);
       localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem("token", response.data.Token);
+      localStorage.setItem("token", response.data.accessToken);
       navigate("/dashboard");
     } catch (error) {
       console.error("Login failed:", error);
