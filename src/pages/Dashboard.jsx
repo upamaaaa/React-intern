@@ -1,11 +1,51 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { useState } from "react";
 
 function Dashboard() {
+  const [currentPage, setCurrentPage] = useState(0);
+
+  const cards = [
+    {
+      title: "Nature",
+      text: "Explore beautiful landscapes and nature views.",
+      btn: "Explore",
+      color: "primary",
+      image:"https://i.pinimg.com/736x/a6/04/39/a60439d0c6592b91b4078156604f5480.jpg"
+    },
+    {
+      title: "Adventure",
+      text: "Discover exciting outdoor adventures.",
+      btn: "Start",
+      color: "success",
+      image: "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0"
+    },
+    {
+      title: "Travel",
+      text: "Plan your next travel destination easily.",
+      btn: "Go",
+      color: "danger",
+      image: "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0"
+    },
+  ];
+
   const handleLogout = () => {
     localStorage.removeItem("isAuthenticated");
     window.location.href = "/";
   };
+
+  const handleNext = () => {
+    if (currentPage < cards.length - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrev = () => {
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
   return (
     <div>
       <div
@@ -50,69 +90,66 @@ function Dashboard() {
         </button>
       </div>
 
-      <div className="container mt-5">
+      {/* ---------------------------------------------------------------- */}
+      <div className="container mt-5 text-center">
         <div className="row text-center">
-
-          {/* Card 1 */}
           <div className="col-md-4 mb-4">
             <div className="card shadow">
               <img
-                src="https://i.pinimg.com/736x/a6/04/39/a60439d0c6592b91b4078156604f5480.jpg"
+                src={cards[currentPage].image}
                 className="card-img-top"
                 alt="..."
               />
               <div className="card-body">
-                <h5 className="card-title">Nature</h5>
-                <p className="card-text">
-                  Explore beautiful landscapes and nature views.
-                </p>
-                <button className="btn btn-primary">Explore</button>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-4 mb-4">
-            <div className="card shadow">
-              <img
-                src="https://i.pinimg.com/736x/a6/04/39/a60439d0c6592b91b4078156604f5480.jpg"
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="card-body">
-                <h5 className="card-title">Adventure</h5>
-                <p className="card-text">
-                  Discover exciting outdoor adventures.
-                </p>
-                <button className="btn btn-success">Start</button>
+                <h5 className="card-title">{cards[currentPage].title}</h5>
+                <p className="card-text">{cards[currentPage].text}</p>
+                <button className={`btn btn-${cards[currentPage].color}`}>
+                  {cards[currentPage].btn}
+                </button>
               </div>
             </div>
           </div>
 
-          <div className="col-md-4 mb-4">
-            <div className="card shadow">
-              <img
-                src="https://i.pinimg.com/736x/a6/04/39/a60439d0c6592b91b4078156604f5480.jpg"
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="card-body">
-                <h5 className="card-title">Travel</h5>
-                <p className="card-text">
-                  Plan your next travel destination easily.
-                </p>
-                <button className="btn btn-danger">Go</button>
-              </div>
-            </div>
-          </div>
-          <button onClick={handleLogout} className="btn btn-secondary">
-            logout
-          </button>
+          {/* -----------------------------------------*/}
+          <div className="col-md-4">
+            <nav>
+              <ul className="pagination justify-content-center">
+                <li
+                  className={`page-item ${currentPage === 0 ? "disabled" : ""}`}
+                >
+                  <button className="page-link" onClick={handlePrev}>
+                    Previous
+                  </button>
+                </li>
 
+                {cards.map((card, index) => (
+                  <li
+                    key={index}
+                    className={`page-item ${currentPage === index ? "active" : ""}`}
+                  >
+                    <button
+                      className="page-link"
+                      onClick={() => setCurrentPage(index)}
+                    >
+                      {index + 1}
+                    </button>
+                  </li>
+                ))}
+
+                <li
+                  className={`page-item ${
+                    currentPage === cards.length - 1 ? "disabled" : ""
+                  }`}
+                >
+                  <button className="page-link" onClick={handleNext}>
+                    Next
+                  </button>
+                </li>
+              </ul>
+            </nav>
+          </div>
         </div>
       </div>
-
-      <footer className="bg-dark text-white text-center p-3 mt-5">
-        <p className="mb-0"> React Dashboard</p>
-      </footer>
     </div>
   );
 }
