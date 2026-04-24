@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import RouteGuard from "./components/RouteGuard";
 import Profile from "./pages/Profile";
 import Navbar from "./components/Navbar";
+import ProjectsPage from "./pages/ProjectsPage";
 function App() {
   return (
     <BrowserRouter>
@@ -33,6 +34,16 @@ function App() {
             <RouteGuard isProtected={true}>
               <Navbar>
                 <Profile />
+              </Navbar>
+            </RouteGuard>
+          }
+        />
+        <Route
+          path="/projects"
+          element={
+            <RouteGuard isProtected={true}>
+              <Navbar>
+                <ProjectsPage />
               </Navbar>
             </RouteGuard>
           }

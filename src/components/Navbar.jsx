@@ -19,6 +19,9 @@ const Navbar = ({ children }) => {
               Profile
             </Link>
           </div>
+          <Link to="/projects" className="btn btn-success">
+              Project
+            </Link>
 
         </div>
       </nav>
