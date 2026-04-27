@@ -12,7 +12,6 @@ const ProjectsPage = () => {
         const response = await axios.get(
           "https://69e9fab115c7e2d512691fa5.mockapi.io/api/projects",
         );
-        console.log("DATA:", response.data);
         setProjects(response.data);
       } catch (error) {
         console.error("Error fetch:", error);
@@ -22,8 +21,15 @@ const ProjectsPage = () => {
     getProjects();
   }, []);
 
+
+  const itemsPerPage = 5;
+  const startIndex = currentPage * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+
+  const currentData = projects.slice(startIndex, endIndex);
+
   const handleNext = () => {
-    if (currentPage < projects.length - 1) {
+    if (endIndex < projects.length) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -60,7 +66,7 @@ const ProjectsPage = () => {
                     </td>
                   </tr>
                 ) : (
-                  projects.map((p) => (
+                  currentData.map((p) => (
                     <tr key={p.id}>
                       <td className="fw-semibold">Project {p.id}</td>
                       <td>{new Date(p.start * 1000).toDateString()}</td>
@@ -108,6 +114,26 @@ const ProjectsPage = () => {
             </table>
           </div>
         </div>
+      </div>
+
+      <div className="d-flex justify-content-center mt-3">
+        <button
+          className="btn btn-secondary me-2"
+          onClick={handlePrev}
+          disabled={currentPage === 0}
+        >
+          Prev
+        </button>
+
+        <span className="align-self-center">Page {currentPage + 1}</span>
+
+        <button
+          className="btn btn-secondary ms-2"
+          onClick={handleNext}
+          disabled={endIndex >= projects.length}
+        >
+          Next
+        </button>
       </div>
     </div>
   );
