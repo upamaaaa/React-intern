@@ -21,11 +21,15 @@ const ProjectsPage = () => {
     getProjects();
   }, []);
 
+
   const itemsPerPage = 5;
   const startIndex = currentPage * itemsPerPage;
-  const currentData = projects.slice(startIndex, startIndex + itemsPerPage);
+  const endIndex = startIndex + itemsPerPage;
+
+  const currentData = projects.slice(startIndex, endIndex);
+
   const handleNext = () => {
-    if (startIndex + itemsPerPage < projects.length) {
+    if (endIndex < projects.length) {
       setCurrentPage(currentPage + 1);
     }
   };
@@ -126,7 +130,7 @@ const ProjectsPage = () => {
         <button
           className="btn btn-secondary ms-2"
           onClick={handleNext}
-          disabled={startIndex + itemsPerPage >= projects.length}
+          disabled={endIndex >= projects.length}
         >
           Next
         </button>
