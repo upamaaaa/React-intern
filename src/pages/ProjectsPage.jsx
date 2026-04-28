@@ -21,7 +21,6 @@ const ProjectsPage = () => {
     getProjects();
   }, []);
 
-
   const itemsPerPage = 5;
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;

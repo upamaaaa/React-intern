@@ -4,10 +4,8 @@ import { Link } from "react-router-dom";
 const Navbar = ({ children }) => {
   return (
     <>
-    
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark px-3">
         <div className="container-fluid">
-
           <span className="navbar-brand">Hi</span>
 
           <div className="d-flex gap-2">
@@ -20,16 +18,12 @@ const Navbar = ({ children }) => {
             </Link>
           </div>
           <Link to="/projects" className="btn btn-success">
-              Project
-            </Link>
-
+            Project
+          </Link>
         </div>
       </nav>
 
-     
-      <div className="container mt-4 shadow p-4 rounded  ">
-        {children}
-      </div>
+      <div>{children}</div>
     </>
   );
 };

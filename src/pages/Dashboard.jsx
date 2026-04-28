@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./Dashboard.scss";
 import { useState } from "react";
 
 function Dashboard() {
@@ -11,21 +12,24 @@ function Dashboard() {
       text: "Explore beautiful landscapes and nature views.",
       btn: "Explore",
       color: "primary",
-      image:"https://i.pinimg.com/736x/a6/04/39/a60439d0c6592b91b4078156604f5480.jpg"
+      image:
+        "https://i.pinimg.com/736x/a6/04/39/a60439d0c6592b91b4078156604f5480.jpg",
     },
     {
       title: "Adventure",
       text: "Discover exciting outdoor adventures.",
       btn: "Start",
       color: "success",
-      image: "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0"
+      image:
+        "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0",
     },
     {
       title: "Travel",
       text: "Plan your next travel destination easily.",
       btn: "Go",
       color: "danger",
-      image: "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0"
+      image:
+        "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0",
     },
   ];
 
@@ -47,33 +51,24 @@ function Dashboard() {
   };
 
   return (
-    <div>
-      <div
-        id="carouselExampleFade"
-        className="carousel slide carousel-fade"
-        data-bs-ride="carousel"
-      >
+    <div className="dashboard">
+      <div id="carouselExampleFade" className="carousel slide carousel-fade">
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img
-              src="https://images.fineartamerica.com/images-medium-large-5/original-landscape-art-birds-painting--alone-now-amy-giacomelli.jpg"
-              className="d-block w-100"
-              alt="..."
-            />
+            <img src="https://wallpapercave.com/wp/wp5848452.jpg" />
           </div>
 
           <div className="carousel-item">
-            <img
-              src="https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0"
-              className="d-block w-100"
-              alt="..."
-            />
+            <img src="https://wallup.net/wp-content/uploads/2016/06/23/383074-New_Zealand-landscape.jpg" />
+          </div>
+
+          <div className="carousel-item">
+            <img src="https://images.pexels.com/photos/371633/pexels-photo-371633.jpeg?cs=srgb&dl=clouds-country-daylight-371633.jpg&fm=jpg" />
           </div>
         </div>
 
         <button
           className="carousel-control-prev"
-          type="button"
           data-bs-target="#carouselExampleFade"
           data-bs-slide="prev"
         >
@@ -82,73 +77,46 @@ function Dashboard() {
 
         <button
           className="carousel-control-next"
-          type="button"
           data-bs-target="#carouselExampleFade"
           data-bs-slide="next"
         >
           <span className="carousel-control-next-icon"></span>
         </button>
       </div>
+      {/* --------------------pagination------------------------------------------------------------------- */}
+      <div className="dashboard__card">
+        <img src={cards[currentPage].image} className="card-img-top" alt="card" />
 
-      {/* ---------------------------------------------------------------- */}
-      <div className="container mt-5 text-center">
-        <div className="row text-center">
-          <div className="col-md-4 mb-4">
-            <div className="card shadow">
-              <img
-                src={cards[currentPage].image}
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="card-body">
-                <h5 className="card-title">{cards[currentPage].title}</h5>
-                <p className="card-text">{cards[currentPage].text}</p>
-                <button className={`btn btn-${cards[currentPage].color}`}>
-                  {cards[currentPage].btn}
-                </button>
-              </div>
-            </div>
-          </div>
+        <div className="dashboard-card-content">
+          <h5>{cards[currentPage].title}</h5>
+          <p>{cards[currentPage].text}</p>
 
-          {/* -----------------------------------------*/}
-          <div className="col-md-4">
-            <nav>
-              <ul className="pagination justify-content-center">
-                <li
-                  className={`page-item ${currentPage === 0 ? "disabled" : ""}`}
-                >
-                  <button className="page-link" onClick={handlePrev}>
-                    Previous
-                  </button>
-                </li>
-
-                {cards.map((card, index) => (
-                  <li
-                    key={index}
-                    className={`page-item ${currentPage === index ? "active" : ""}`}
-                  >
-                    <button
-                      className="page-link"
-                      onClick={() => setCurrentPage(index)}
-                    >
-                      {index + 1}
-                    </button>
-                  </li>
-                ))}
-
-                <li
-                  className={`page-item ${
-                    currentPage === cards.length - 1 ? "disabled" : ""
-                  }`}
-                >
-                  <button className="page-link" onClick={handleNext}>
-                    Next
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          </div>
+        
+          <button className="dashboard__button">{cards[currentPage].btn}</button>
         </div>
+      </div>
+      {/* ----------------------------------------------------------------------------------------------*/}
+      <div className="dashboard__pagination">
+        <button onClick={handlePrev} disabled={currentPage === 0}>
+          Prev
+        </button>
+
+        {cards.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentPage(index)}
+            className={currentPage === index ? "active" : ""}
+          >
+            {index + 1}
+          </button>
+        ))}
+
+        <button className="dashboard__pagination-button"
+          onClick={handleNext}
+          disabled={currentPage === cards.length - 1}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

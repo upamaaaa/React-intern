@@ -1,0 +1,83 @@
+.dashboard {
+  .carousel {
+    width: 100%;
+    max-height: calc(100vh - 56px);
+    // margin-bottom: 40px;
+    overflow: hidden;
+  }
+
+  .carousel-inner {
+    height: 100%;
+  }
+
+  .carousel-item {
+    height: 100%;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: 400%;
+    object-fit: cover;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+
+    img {
+      width: 500px;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .dashboard-card-content {
+      // dashboard__card--content
+      text-align: center;
+
+      h5 {
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 1rem;
+        color: #555;
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  &__pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+
+    button {
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: #5d66b7;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+      }
+
+      .active {
+        background: black;
+        color: white;
+        border: none;
+      }
+    }
+  }
+}
