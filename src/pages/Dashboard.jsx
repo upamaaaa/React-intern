@@ -9,25 +9,22 @@ function Dashboard() {
   const cards = [
     {
       title: "Nature",
-      text: "Explore beautiful landscapes and nature views.",
+      text: "Nature’s landscapes offer a quiet kind of beauty that feels both vast and deeply personal at the same time. From towering mountains draped in morning mist to calm lakes reflecting the sky like a mirror, every scene carries a sense of balance and harmony that’s hard to replicate anywhere else. ",
       btn: "Explore",
-      color: "primary",
       image:
-        "https://i.pinimg.com/736x/a6/04/39/a60439d0c6592b91b4078156604f5480.jpg",
+        "https://sp.yimg.com/ib/th/id/OIP.MhAVj10KCQgX-pYM3ciudwHaLH?pid=Api&w=148&h=148&c=7&dpr=2&rs=1",
     },
     {
       title: "Adventure",
-      text: "Discover exciting outdoor adventures.",
+      text: "Discover exciting outdoor adventures near you! From hiking and biking to kayaking and rock climbing, there’s something for every thrill-seeker. Explore new trails, conquer challenging terrains, and experience the rush of adrenaline while connecting with nature. Whether you’re a beginner or an experienced adventurer, find your next unforgettable outdoor experience today!",
       btn: "Start",
-      color: "success",
       image:
         "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0",
     },
     {
       title: "Travel",
-      text: "Plan your next travel destination easily.",
+      text: "Plan your next travel destination easily. Discover new places, find the best deals, and create unforgettable memories. Whether you're looking for a relaxing beach getaway, an adventurous mountain escape, or a vibrant city experience, our travel planning tools make it simple to organize your perfect trip. Start exploring the world today!",
       btn: "Go",
-      color: "danger",
       image:
         "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0",
     },
@@ -85,14 +82,19 @@ function Dashboard() {
       </div>
       {/* --------------------pagination------------------------------------------------------------------- */}
       <div className="dashboard__card">
-        <img src={cards[currentPage].image} className="card-img-top" alt="card" />
+        <img
+          src={cards[currentPage].image}
+          className="card-img-top"
+          alt="card"
+        />
 
-        <div className="dashboard-card-content">
+        <div className="dashboard__card-content">
           <h5>{cards[currentPage].title}</h5>
           <p>{cards[currentPage].text}</p>
 
-        
-          <button className="dashboard__button">{cards[currentPage].btn}</button>
+          <button className="dashboard__button">
+            {cards[currentPage].btn}
+          </button>
         </div>
       </div>
       {/* ----------------------------------------------------------------------------------------------*/}
@@ -105,13 +107,18 @@ function Dashboard() {
           <button
             key={index}
             onClick={() => setCurrentPage(index)}
-            className={currentPage === index ? "active" : ""}
+            className={
+              currentPage === index
+                ? "dashboard__pagination-button active"
+                : "dashboard__pagination-button"
+            }
           >
             {index + 1}
           </button>
         ))}
 
-        <button className="dashboard__pagination-button"
+        <button
+          className="dashboard__pagination__button"
           onClick={handleNext}
           disabled={currentPage === cards.length - 1}
         >
