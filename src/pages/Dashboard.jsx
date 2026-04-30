@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import "./Dashboard.scss";
 import { useState } from "react";
 
 function Dashboard() {
@@ -8,24 +9,24 @@ function Dashboard() {
   const cards = [
     {
       title: "Nature",
-      text: "Explore beautiful landscapes and nature views.",
+      text: "Nature’s landscapes offer a quiet kind of beauty that feels both vast and deeply personal at the same time. From towering mountains draped in morning mist to calm lakes reflecting the sky like a mirror, every scene carries a sense of balance and harmony that’s hard to replicate anywhere else. ",
       btn: "Explore",
-      color: "primary",
-      image:"https://i.pinimg.com/736x/a6/04/39/a60439d0c6592b91b4078156604f5480.jpg"
+      image:
+        "https://sp.yimg.com/ib/th/id/OIP.MhAVj10KCQgX-pYM3ciudwHaLH?pid=Api&w=148&h=148&c=7&dpr=2&rs=1",
     },
     {
       title: "Adventure",
-      text: "Discover exciting outdoor adventures.",
+      text: "Discover exciting outdoor adventures near you! From hiking and biking to kayaking and rock climbing, there’s something for every thrill-seeker. Explore new trails, conquer challenging terrains, and experience the rush of adrenaline while connecting with nature. Whether you’re a beginner or an experienced adventurer, find your next unforgettable outdoor experience today!",
       btn: "Start",
-      color: "success",
-      image: "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0"
+      image:
+        "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0",
     },
     {
       title: "Travel",
-      text: "Plan your next travel destination easily.",
+      text: "Plan your next travel destination easily. Discover new places, find the best deals, and create unforgettable memories. Whether you're looking for a relaxing beach getaway, an adventurous mountain escape, or a vibrant city experience, our travel planning tools make it simple to organize your perfect trip. Start exploring the world today!",
       btn: "Go",
-      color: "danger",
-      image: "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0"
+      image:
+        "https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0",
     },
   ];
 
@@ -47,33 +48,24 @@ function Dashboard() {
   };
 
   return (
-    <div>
-      <div
-        id="carouselExampleFade"
-        className="carousel slide carousel-fade"
-        data-bs-ride="carousel"
-      >
+    <div className="dashboard">
+      <div id="carouselExampleFade" className="carousel slide carousel-fade">
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img
-              src="https://images.fineartamerica.com/images-medium-large-5/original-landscape-art-birds-painting--alone-now-amy-giacomelli.jpg"
-              className="d-block w-100"
-              alt="..."
-            />
+            <img src="https://wallpapercave.com/wp/wp5848452.jpg" />
           </div>
 
           <div className="carousel-item">
-            <img
-              src="https://tse1.mm.bing.net/th/id/OIP.UWbB8T23yf62W-kXWygrKgHaEJ?pid=Api&h=220&P=0"
-              className="d-block w-100"
-              alt="..."
-            />
+            <img src="https://wallup.net/wp-content/uploads/2016/06/23/383074-New_Zealand-landscape.jpg" />
+          </div>
+
+          <div className="carousel-item">
+            <img src="https://images.pexels.com/photos/371633/pexels-photo-371633.jpeg?cs=srgb&dl=clouds-country-daylight-371633.jpg&fm=jpg" />
           </div>
         </div>
 
         <button
           className="carousel-control-prev"
-          type="button"
           data-bs-target="#carouselExampleFade"
           data-bs-slide="prev"
         >
@@ -82,73 +74,56 @@ function Dashboard() {
 
         <button
           className="carousel-control-next"
-          type="button"
           data-bs-target="#carouselExampleFade"
           data-bs-slide="next"
         >
           <span className="carousel-control-next-icon"></span>
         </button>
       </div>
+      {/* --------------------pagination------------------------------------------------------------------- */}
+      <div className="dashboard__card">
+        <img
+          src={cards[currentPage].image}
+          className="card-img-top"
+          alt="card"
+        />
 
-      {/* ---------------------------------------------------------------- */}
-      <div className="container mt-5 text-center">
-        <div className="row text-center">
-          <div className="col-md-4 mb-4">
-            <div className="card shadow">
-              <img
-                src={cards[currentPage].image}
-                className="card-img-top"
-                alt="..."
-              />
-              <div className="card-body">
-                <h5 className="card-title">{cards[currentPage].title}</h5>
-                <p className="card-text">{cards[currentPage].text}</p>
-                <button className={`btn btn-${cards[currentPage].color}`}>
-                  {cards[currentPage].btn}
-                </button>
-              </div>
-            </div>
-          </div>
+        <div className="dashboard__card-content">
+          <h5>{cards[currentPage].title}</h5>
+          <p>{cards[currentPage].text}</p>
 
-          {/* -----------------------------------------*/}
-          <div className="col-md-4">
-            <nav>
-              <ul className="pagination justify-content-center">
-                <li
-                  className={`page-item ${currentPage === 0 ? "disabled" : ""}`}
-                >
-                  <button className="page-link" onClick={handlePrev}>
-                    Previous
-                  </button>
-                </li>
-
-                {cards.map((card, index) => (
-                  <li
-                    key={index}
-                    className={`page-item ${currentPage === index ? "active" : ""}`}
-                  >
-                    <button
-                      className="page-link"
-                      onClick={() => setCurrentPage(index)}
-                    >
-                      {index + 1}
-                    </button>
-                  </li>
-                ))}
-
-                <li
-                  className={`page-item ${
-                    currentPage === cards.length - 1 ? "disabled" : ""
-                  }`}
-                >
-                  <button className="page-link" onClick={handleNext}>
-                    Next
-                  </button>
-                </li>
-              </ul>
-            </nav>
-          </div>
+          <button className="dashboard__button">
+            {cards[currentPage].btn}
+          </button>
         </div>
+      </div>
+      {/* ----------------------------------------------------------------------------------------------*/}
+      <div className="dashboard__pagination">
+        <button onClick={handlePrev} disabled={currentPage === 0}>
+          Prev
+        </button>
+
+        {cards.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentPage(index)}
+            className={
+              currentPage === index
+                ? "dashboard__pagination-button active"
+                : "dashboard__pagination-button"
+            }
+          >
+            {index + 1}
+          </button>
+        ))}
+
+        <button
+          className="dashboard__pagination__button"
+          onClick={handleNext}
+          disabled={currentPage === cards.length - 1}
+        >
+          Next
+        </button>
       </div>
     </div>
   );

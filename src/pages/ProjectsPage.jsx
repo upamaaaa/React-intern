@@ -5,6 +5,8 @@ import axios from "axios";
 const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
+  const [search, setSearch] = useState("");
+  const [sortType, setSortType] = useState("");
 
   useEffect(() => {
     const getProjects = async () => {
@@ -22,11 +24,27 @@ const ProjectsPage = () => {
   }, []);
 
 
+  const filteredProjects = projects.filter((p) =>
+    `Project ${p.id}`.toLowerCase().includes(search.toLowerCase()),
+  );
+
+
+  const sortedProjects = [...filteredProjects].sort((a, b) => {
+    if (sortType === "progress") {
+      return b.progress - a.progress;
+    }
+    if (sortType === "start") {
+      return a.start - b.start;
+    }
+    return 0;
+  });
+
+
   const itemsPerPage = 5;
   const startIndex = currentPage * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
 
-  const currentData = projects.slice(startIndex, endIndex);
+  const currentData = sortedProjects.slice(startIndex, endIndex);
 
   const handleNext = () => {
     if (endIndex < projects.length) {
@@ -40,8 +58,35 @@ const ProjectsPage = () => {
     }
   };
 
+  
+  const getProgressColor = (progress) => {
+    if (progress <= 25) return "bg-danger";
+    if (progress <= 50) return "bg-warning";
+    if (progress <= 75) return "bg-info";
+    return "bg-success";
+  };
+
   return (
     <div className="container py-4">
+      <div className="d-flex justify-content-between mb-3">
+        <input
+          type="text"
+          placeholder="Search project..."
+          className="form-control w-50"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </div>
+
+      <select
+        className="form-select w-25"
+        onChange={(e) => setSortType(e.target.value)}
+      >
+        <option value="">Sort By</option>
+        <option value="progress">Progress</option>
+        <option value="start">Start Date</option>
+      </select>
+
       <div className="card shadow-sm">
         <div className="card-body p-0">
           <div className="table-responsive">
@@ -75,7 +120,7 @@ const ProjectsPage = () => {
                       <td>
                         <div className="progress">
                           <div
-                            className="progress-bar"
+                            className={`progress-bar ${getProgressColor(p.progress)}`}
                             style={{ width: `${p.progress}%` }}
                           >
                             {p.progress}%
