@@ -1,17 +1,17 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-const RouteGuard = ({ children, isProtected }) => {
+const RouteGuard = ({ isProtected }) => {
   const isAuthenticated = localStorage.getItem("isAuthenticated");
 
   if (isProtected && !isAuthenticated) {
-    return <Navigate to="/" />;
+    return <Navigate to="/" replace />;
   }
 
   if (!isProtected && isAuthenticated) {
-    return <Navigate to="/dashboard" />;
+    return <Navigate to="/dashboard" replace />;
   }
 
-  return children;
+  return <Outlet />;
 };
 
 export default RouteGuard;

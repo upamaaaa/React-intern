@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
+import Button from "../../components/Button/Button";
 
 const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);
@@ -23,22 +24,29 @@ const ProjectsPage = () => {
     getProjects();
   }, []);
 
+  const sortedProjects = useMemo(() => {
+    let data = [...projects];
 
-  const filteredProjects = projects.filter((p) =>
-    `Project ${p.id}`.toLowerCase().includes(search.toLowerCase()),
-  );
+    // SEARCH
+    data = data.filter((p) =>
+      `Project ${p.id}`.toLowerCase().includes(search.toLowerCase()),
+    );
 
-
-  const sortedProjects = [...filteredProjects].sort((a, b) => {
-    if (sortType === "progress") {
-      return b.progress - a.progress;
+    // SORTING
+    if (sortType === "BookingStatusHigh") {
+      data.sort((a, b) => b.BookingStatus - a.BookingStatus);
     }
+
+    if (sortType === "BookingStatusLow") {
+      data.sort((a, b) => a.BookingStatus - b.BookingStatus);
+    }
+
     if (sortType === "start") {
-      return a.start - b.start;
+      data.sort((a, b) => a.start - b.start);
     }
-    return 0;
-  });
 
+    return data;
+  }, [projects, search, sortType]);
 
   const itemsPerPage = 5;
   const startIndex = currentPage * itemsPerPage;
@@ -58,11 +66,10 @@ const ProjectsPage = () => {
     }
   };
 
-  
-  const getProgressColor = (progress) => {
-    if (progress <= 25) return "bg-danger";
-    if (progress <= 50) return "bg-warning";
-    if (progress <= 75) return "bg-info";
+  const getProgressColor = (BookingStatus) => {
+    if (BookingStatus <= 25) return "bg-danger";
+    if (BookingStatus <= 50) return "bg-warning";
+    if (BookingStatus <= 75) return "bg-info";
     return "bg-success";
   };
 
@@ -71,7 +78,7 @@ const ProjectsPage = () => {
       <div className="d-flex justify-content-between mb-3">
         <input
           type="text"
-          placeholder="Search project..."
+          placeholder="Search "
           className="form-control w-50"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -83,7 +90,8 @@ const ProjectsPage = () => {
         onChange={(e) => setSortType(e.target.value)}
       >
         <option value="">Sort By</option>
-        <option value="progress">Progress</option>
+        <option value="BookingStatusHigh">Booking Status (DESC)</option>
+        <option value="BookingStatusLow">Booking Status (ASC)</option>
         <option value="start">Start Date</option>
       </select>
 
@@ -93,13 +101,13 @@ const ProjectsPage = () => {
             <table className="table mb-0 align-middle">
               <thead className="table-dark">
                 <tr>
-                  <th>Project</th>
+                  <th>Destination</th>
                   <th>Start</th>
                   <th>End</th>
-                  <th>Progress</th>
-                  <th>Status</th>
+                  <th>Booking Status</th>
+                  <th>Available</th>
                   <th>Priority</th>
-                  <th>Owner</th>
+                  <th>Guide</th>
                 </tr>
               </thead>
 
@@ -120,10 +128,10 @@ const ProjectsPage = () => {
                       <td>
                         <div className="progress">
                           <div
-                            className={`progress-bar ${getProgressColor(p.progress)}`}
-                            style={{ width: `${p.progress}%` }}
+                            className={`progress-bar ${getProgressColor(p.BookingStatus)}`}
+                            style={{ width: `${p.BookingStatus}%` }}
                           >
-                            {p.progress}%
+                            {p.BookingStatus}%
                           </div>
                         </div>
                       </td>
@@ -146,7 +154,7 @@ const ProjectsPage = () => {
 
                       <td>
                         <img
-                          src={p.avatar}
+                          src={p.Guide}
                           alt="user"
                           className="rounded-circle"
                           style={{ width: "32px", height: "32px" }}
@@ -162,23 +170,20 @@ const ProjectsPage = () => {
       </div>
 
       <div className="d-flex justify-content-center mt-3">
-        <button
-          className="btn btn-secondary me-2"
+        <Button
+          text={`prev`}
           onClick={handlePrev}
           disabled={currentPage === 0}
-        >
-          Prev
-        </button>
-
+          style={{ backgroundColor: "black", color: "white" }}
+        />
         <span className="align-self-center">Page {currentPage + 1}</span>
 
-        <button
-          className="btn btn-secondary ms-2"
+        <Button
+          text={`next`}
           onClick={handleNext}
           disabled={endIndex >= projects.length}
-        >
-          Next
-        </button>
+          style={{ backgroundColor: "black", color: "white" }}
+        />
       </div>
     </div>
   );
