@@ -6,12 +6,11 @@ import axios from "axios";
 import cat from "../../assets/cat.png";
 import "./Login.scss";
 
-function Register() {
+function Login() {
   const navigate = useNavigate();
 
   const { showPassword, togglePassword } = useTogglePassword();
   const {
-    control,
     handleSubmit,
     formState: { errors, isValid },
     reset,
@@ -26,6 +25,7 @@ function Register() {
       const response = await axios.post(
         "https://dummyjson.com/auth/login",
         data,
+        { withCredentials: true },
       );
 
       console.log("Login successful:", response.data);
@@ -39,7 +39,7 @@ function Register() {
     } catch (error) {
       console.error("Login failed:", error);
 
-      alert("Login failed. Please check your credentials and try again.");
+      toast.error("Login failed. Please check your credentials and try again.");
 
       clearErrors();
       return;
@@ -47,7 +47,7 @@ function Register() {
 
     reset();
   };
-
+  
   return (
     <div className="login">
       <div className="login__container">
@@ -55,7 +55,7 @@ function Register() {
           <img src={cat} alt="Travel" className="login__image" />
 
           <div className="login__overlay">
-            <h1 className="login__title">Upama Tours</h1>
+            <h1 className="login__title"> Tours</h1>
           </div>
         </div>
 
@@ -120,4 +120,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default Login;

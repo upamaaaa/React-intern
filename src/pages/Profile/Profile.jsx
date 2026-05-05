@@ -30,7 +30,7 @@ function Profile() {
   }
 
   return (
-    <div className="profile container">
+    <div className="profile__container">
 
 
       <div className="profile__card">

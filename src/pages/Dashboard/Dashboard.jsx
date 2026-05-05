@@ -141,8 +141,6 @@ function Dashboard() {
         ))}
       </div>
 
-      {/* PAGINATION */}
-
       <div className="dashboard__pagination">
         {Array.from({
           length: totalPages,

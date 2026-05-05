@@ -32,6 +32,7 @@ const Navbar = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+
         setUser(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);

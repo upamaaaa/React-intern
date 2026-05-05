@@ -132,26 +132,26 @@
   }
 }
 
-@media (max-width: 576px) {
-  .dashboard {
-    &__cards {
-      grid-template-columns: 1fr;
-    }
+// @media (max-width: 576px) {
+//   .dashboard {
+//     &__cards {
+//       grid-template-columns: 1fr;
+//     }
 
-    .carousel {
-      height: 60vh;
-    }
+//     .carousel {
+//       height: 60vh;
+//     }
 
-    .carousel-caption {
-      h1 {
-        font-size: 30px;
-      }
-    }
+//     .carousel-caption {
+//       h1 {
+//         font-size: 30px;
+//       }
+//     }
 
-    &__section-title {
-      h2 {
-        font-size: 32px;
-      }
-    }
-  }
-}
+//     &__section-title {
+//       h2 {
+//         font-size: 32px;
+//       }
+//     }
+//   }
+// }

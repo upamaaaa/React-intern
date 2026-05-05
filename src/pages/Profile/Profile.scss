@@ -3,6 +3,11 @@
   padding: 50px 20px;
   color: rgb(11, 1, 1);
 
+  &__container {
+    display: flex;
+    justify-content: center;
+  }
+
   &__card {
     border-radius: 30px;
     padding: 50px 30px;
@@ -51,7 +56,7 @@
       font-weight: 700;
     }
   }
-}
+ }
 
 /* RESPONSIVE */
 
