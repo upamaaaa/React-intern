@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import axios from "axios";
-import Button from "../../components/Button/Button";
+import Button from "@/components/Button/Button";
 
 const ProjectsPage = () => {
   const [projects, setProjects] = useState([]);
@@ -25,9 +25,8 @@ const ProjectsPage = () => {
   }, []);
 
   const sortedProjects = useMemo(() => {
-    let data = [...projects];
+    let data = projects;
 
-    // SEARCH
     data = data.filter((p) =>
       `Project ${p.id}`.toLowerCase().includes(search.toLowerCase()),
     );

@@ -3,14 +3,7 @@ import { toast } from "react-toastify";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-import {
-  LayoutDashboard,
-  User,
-  FolderKanban,
-  LogOut,
-  Menu,
-  X,
-} from "lucide-react";
+import { LayoutDashboard, User, FolderKanban, LogOut, X } from "lucide-react";
 
 import "./Navbar.scss";
 import Button from "../Button/Button";
@@ -18,7 +11,7 @@ import Button from "../Button/Button";
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const [menuOpen, setMenuOpen] = useState(false);
+  // const [menuOpen, setMenuOpen] = useState(false);
 
   const [user, setUser] = useState(null);
 
@@ -51,9 +44,7 @@ const Navbar = () => {
           </div>
         </div>
 
-        <div
-          className={`navbar__links ${menuOpen ? "navbar__links--active" : ""}`}
-        >
+        <div className={`navbar__links `}>
           <Link to="/dashboard" className="navbar__link">
             <LayoutDashboard size={18} />
             Dashboard
@@ -68,6 +59,13 @@ const Navbar = () => {
             <FolderKanban size={18} />
             Destinations
           </Link>
+
+           <Link to="/todo" className="navbar__link">
+            <FolderKanban size={18} />
+            Todo
+          </Link>
+
+          
 
           <Button
             text={`Logout`}
