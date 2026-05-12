@@ -7,10 +7,6 @@ const RouteGuard = ({ isProtected }) => {
     return <Navigate to="/" replace />;
   }
 
-  if (!isProtected && isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
-  }
-
   return <Outlet />;
 };
 

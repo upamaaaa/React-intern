@@ -1,0 +1,50 @@
+{
+  "todo": [
+    {
+      "title": "usx",
+      "completed": false,
+      "id": "WGcARos4c4Y"
+    },
+    {
+      "title": "sqsq;lkjh",
+      "completed": false,
+      "id": "uMonYDc4TWA"
+    },
+    {
+      "title": "/;lkn",
+      "completed": false,
+      "id": "G72PeYiVicY"
+    },
+    {
+      "title": "swdf",
+      "completed": false,
+      "id": "aWgafx4SfrI"
+    },
+    {
+      "title": "tttttvcxzx",
+      "completed": false,
+      "id": "1GOSsDFreHg"
+    },
+    {
+      "title": "jhgf",
+      "completed": false,
+      "id": "lWLI5iHv9BE"
+    },
+    {
+      "title": "hhihihih",
+      "completed": false,
+      "id": "e5RAFBR-V08"
+    },
+    {
+      "title": "sdfddd",
+      "completed": false,
+      "id": "HwhR1YO4mqU"
+    },
+    {
+      "title": "okj=ed",
+      "completed": false,
+      "id": "TuVm5fUhF74"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}

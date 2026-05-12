@@ -28,26 +28,27 @@ function Login() {
         { withCredentials: true },
       );
 
-      console.log("Login successful:", response.data);
+      if (response.status === 200) {
+        // console.log("Login successful:", response.data);
 
-      toast.success("Login successful!");
+        toast.success("Login successful!");
 
-      localStorage.setItem("isAuthenticated", "true");
-      localStorage.setItem("token", response.data.accessToken);
-
-      navigate("/dashboard");
+        localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("token", response.data.accessToken);
+        navigate("/dashboard");
+      }
     } catch (error) {
       console.error("Login failed:", error);
 
       toast.error("Login failed. Please check your credentials and try again.");
 
       clearErrors();
-      return;
+      // return;
     }
 
     reset();
   };
-  
+
   return (
     <div className="login">
       <div className="login__container">

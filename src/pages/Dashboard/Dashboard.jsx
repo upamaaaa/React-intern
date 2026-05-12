@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import Button from "../../components/Button/Button.jsx";
+import Button from "@/components/Button/Button";
 
 import "./Dashboard.scss";
 
